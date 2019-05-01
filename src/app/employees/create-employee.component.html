@@ -1,4 +1,4 @@
-<form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
+<form #employeeForm="ngForm"  (ngSubmit)="saveEmployee(employeeForm)">
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Create Employee</h3>
@@ -38,11 +38,11 @@
           <label >Gender</label>
           <div class="form-control">
             <label class="radio-inline">
-                <input type="radio" value="male" name="gender" [(ngModel)]="male">
+                <input type="radio" value="male" name="gender" [(ngModel)]="gender">
                 Male
             </label>
             <label class="radio-inline">
-                <input type="radio" value="female" name="gender" [(ngModel)]="female">
+                <input type="radio" value="female" name="gender" [(ngModel)]="gender">
                 Female
             </label>
           </div>
@@ -51,15 +51,50 @@
       <div class="form-group">
           <div class="form-control">
             <label >
-                <input type="checkbox"  name="IsActive" [(ngModel)]="yesss">
-                IsActive
+                <input type="checkbox"  name="IsActive" [(ngModel)]="IsActive">
+                Is Active
             </label>
           </div>
       </div>
-     </div>
-   
+     
+
+     <div class="form-group">  
+          <label for="department">    
+              Department
+          </label>
+          <select type="checkbox" id="department" class="form-control" name="department" [(ngModel)]="department">
+            <option *ngFor="let dept of departments" [value]="dept.id">
+              {{dept.name}}
+            </option>
+          </select>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-5">
+            <label for="dateOfBirth">Date OF Birth</label>
+            <input type="text" bsDatepicker [bsConfig]="datePickerConfig" id="dateOfBirth" class="form-control" name="dateOfBirth" [(ngModel)]="dateOfBirth" placement="top">
+          </div>
+       </div>
+
+       <div class="form-group">
+          <label for="photoPath">Photo Path</label>
+          <input type="text" id="photoPath" class="form-control" name="photoPath" [(ngModel)]="photoPath">
+        </div>
+
+        <div class="form-group">
+          <button type="button" (click)="togglePhotoPreview()" class="btn btn-primary">
+            {{previewphoto? "Hide ": "Show "}} PreView 
+          </button>
+        </div>
+
+        <div class="form-group">
+          <img [src]="photoPath" width="200" height="200" *ngIf="previewphoto"/>
+        </div>
+
+    </div>
+
+
      <div class="panel-footer">
-       <button type="submit">Save</button>
+       <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </div>
 </form>
